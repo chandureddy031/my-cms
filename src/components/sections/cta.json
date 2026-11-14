@@ -1,0 +1,1 @@
+{ "collectionName": "components_sections_ctas", "info": { "displayName": "CTA" }, "attributes": { "heading": {"type":"string"}, "text": {"type":"text"}, "buttonText": {"type":"string"}, "buttonLink": {"type":"string"} } }

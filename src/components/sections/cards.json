@@ -1,0 +1,1 @@
+{ "collectionName": "components_sections_cards", "info": { "displayName": "Cards" }, "attributes": { "heading": {"type":"string"}, "intro": {"type":"text"}, "items": {"type":"component","repeatable":true,"component":"shared.card"} } }

@@ -1,0 +1,1 @@
+{ "collectionName": "components_sections_text_blocks", "info": { "displayName": "Text Block" }, "attributes": { "heading": {"type":"string"}, "body": {"type":"text"} } }
