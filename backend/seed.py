@@ -150,10 +150,10 @@ GALLERY_CAPTIONS = {
     "agriculture": ["Demonstration plot", "Seed distribution", "Drip irrigation", "Farmer group meeting", "Harvest day"],
 }
 
-REPORTS = [  # ponytail: sample PDFs in frontend/public/assets; replace with the real audited documents
-    ("annual-2025", "Annual Report 2025", "2025", "Reached 48,000 beneficiaries across 120 villages. 92% of funds went directly to programmes.", "/assets/report-annual-2025.pdf"),
-    ("annual-2024", "Annual Report 2024", "2024", "Opened 4 new elder day-care centres and 12 learning hubs.", "/assets/report-annual-2024.pdf"),
-    ("audit-2025", "Audit & Compliance 2025", "2025", "Independently audited financial statements and governance disclosures.", "/assets/report-audit-2025.pdf"),
+REPORTS = [  # PDFs in frontend/public/assets
+    ("beauty-demand-2026", "Beauty Customer Demand – India & Bengaluru", "2026", "How customers in India and Bengaluru search for and book beauty services.", "/assets/report-beauty-demand-2026.pdf"),
+    ("prospectpilot-guide-short", "ProspectPilot AI – Build Guide (Short)", "2026", "Step-by-step build guide, short version.", "/assets/report-prospectpilot-guide-short.pdf"),
+    ("prospectpilot-guide", "ProspectPilot AI – Build Guide", "2026", "Step-by-step build guide, full version.", "/assets/report-prospectpilot-guide.pdf"),
 ]
 
 # Openly licensed gallery photos (Openverse); credit is shown under each photo as the licence requires.
