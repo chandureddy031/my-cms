@@ -12,7 +12,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const unlocked = Boolean(await readKey());
   return (
     <div className="min-h-screen">
-      <header className="glass sticky top-0 z-30 shadow-soft">
+      {/* no backdrop-filter here: it would trap the fixed mobile drawer inside the header */}
+      <header className="sticky top-0 z-30 border-b border-brand-100 bg-white/95 shadow-soft">
         <div className="flex items-center gap-x-6 px-4 py-3 md:px-10 md:py-4">
           <Link href="/apple" className="flex items-center gap-2 text-2xl"><Logo name="APPLE" /> <span className="rounded-full bg-ink px-2 py-0.5 text-xs font-bold text-white">CMS</span></Link>
           {unlocked && (

@@ -34,7 +34,7 @@ export default async function List({ params, searchParams }: P) {
       )}
       <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {shown.map((i) => (
-          <li key={i.id}>
+          <li key={i.id} className="min-w-0">
             <Link href={`/apple/${section}/${i.id}`} className="group flex items-center gap-4 rounded-2xl border border-brand-100 bg-white p-4 lift">
               {section === "caretakers" ? <Avatar name={i.title} image={i.image} size="h-16 w-16 text-xl" />
                 : i.image && !i.image.endsWith(".pdf") ? <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl"><Image src={i.image} alt="" fill sizes="80px" className="object-cover" /></div>
@@ -43,7 +43,7 @@ export default async function List({ params, searchParams }: P) {
                 <p className="truncate font-semibold group-hover:text-brand-700">{i.title}</p>
                 <p className="truncate text-sm text-gray-500">{[i.meta, i.parent, i.slug && `/${i.slug}`].filter(Boolean).join(" · ") || i.body}</p>
               </div>
-              <span className="text-sm text-brand-600 opacity-0 transition group-hover:opacity-100">Edit →</span>
+              <span className="hidden text-sm text-brand-600 opacity-0 transition group-hover:opacity-100 md:inline">Edit →</span>
             </Link>
           </li>
         ))}
