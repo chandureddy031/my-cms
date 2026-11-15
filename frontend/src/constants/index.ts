@@ -35,7 +35,7 @@ export const SECTION_LABELS: Record<(typeof SECTIONS)[number], string> = {
 // Which fields the CMS shows per section, with what label.
 export const FIELDS: Record<(typeof SECTIONS)[number], Partial<Record<"title" | "slug" | "meta" | "body" | "details" | "image" | "parent" | "email" | "phone" | "position", string>>> = {
   activities: { title: "Title", slug: "URL slug", meta: "Label", body: "Summary", details: "Full page text", image: "Image path", position: "Order" },
-  reports: { title: "Title", slug: "URL slug", meta: "Year", body: "Summary", position: "Order" },
+  reports: { title: "Title", slug: "URL slug", meta: "Year", body: "Summary", image: "PDF file path (e.g. /assets/report-2025.pdf)", position: "Order" },
   stories: { title: "Title", slug: "URL slug", parent: "Activity slug", meta: "Label", body: "Summary", details: "Full story", image: "Image path", position: "Order" },
   gallery: { title: "Caption", parent: "Activity slug (album)", meta: "Label", body: "Description", image: "Image path", position: "Order" },
   caretakers: { title: "Name", slug: "URL slug", meta: "Role", parent: "Group (\"team\" shows on About Us)", body: "Short intro", details: "About", image: "Photo path (blank = initials)", email: "Email", phone: "Phone", position: "Order" },

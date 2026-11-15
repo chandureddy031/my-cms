@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBySlug, getSection } from "@/lib/api";
-import { Back, Card, CTA, FOCUS, Rich } from "@/components/ui";
+import { Back, Card, CTA, Rich } from "@/components/ui";
 
 type P = { params: Promise<{ slug: string }> };
 
@@ -52,7 +52,7 @@ export default async function Activity({ params }: P) {
           <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-5">
             {photos.map((p, i) => (
               <figure key={p.id} className={`reveal relative overflow-hidden rounded-3xl shadow-soft ${i === 0 ? "col-span-2 row-span-2 h-80 md:h-full" : "h-40"}`}>
-                <Image src={p.image!} alt={p.title} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover transition duration-700 hover:scale-110" style={{ objectPosition: FOCUS[i % FOCUS.length] }} />
+                <Image src={p.image!} alt={p.title} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover transition duration-700 hover:scale-110" />
                 <figcaption className="glass absolute bottom-2 left-2 rounded-full px-3 py-1 text-xs font-semibold text-brand-900">{p.title}</figcaption>
               </figure>
             ))}

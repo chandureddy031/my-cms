@@ -1,4 +1,5 @@
 """Reset page content to the starting set. Donations and site settings are untouched."""
+import json
 import os
 from pathlib import Path
 
@@ -149,11 +150,14 @@ GALLERY_CAPTIONS = {
     "agriculture": ["Demonstration plot", "Seed distribution", "Drip irrigation", "Farmer group meeting", "Harvest day"],
 }
 
-REPORTS = [
-    ("annual-2025", "Annual Report 2025", "2025", "Reached 48,000 beneficiaries across 120 villages. 92% of funds went directly to programmes."),
-    ("annual-2024", "Annual Report 2024", "2024", "Opened 4 new elder day-care centres and 12 learning hubs."),
-    ("audit-2025", "Audit & Compliance 2025", "2025", "Independently audited financial statements and governance disclosures."),
+REPORTS = [  # ponytail: sample PDFs in frontend/public/assets; replace with the real audited documents
+    ("annual-2025", "Annual Report 2025", "2025", "Reached 48,000 beneficiaries across 120 villages. 92% of funds went directly to programmes.", "/assets/report-annual-2025.pdf"),
+    ("annual-2024", "Annual Report 2024", "2024", "Opened 4 new elder day-care centres and 12 learning hubs.", "/assets/report-annual-2024.pdf"),
+    ("audit-2025", "Audit & Compliance 2025", "2025", "Independently audited financial statements and governance disclosures.", "/assets/report-audit-2025.pdf"),
 ]
+
+# Openly licensed gallery photos (Openverse); credit is shown under each photo as the licence requires.
+CREDITS = json.loads(Path(__file__).with_name("photo_credits.json").read_text())
 
 STATS = [("Beneficiaries", "48,000+"), ("Villages", "120"), ("Volunteers", "1,500"), ("Years of service", "18")]
 
@@ -176,10 +180,14 @@ def rows():
         yield dict(section="caretakers", slug=s, title=name, body=body, details=details, meta=role, image=img, position=n,
                    email=f"{s.replace('-', '.')}@apple-foundation.org", phone="+91 00000 00000")
     for slug, caps in GALLERY_CAPTIONS.items():
+        photos = CREDITS.get(slug, [])
         for n, cap in enumerate(caps, 1):
-            yield dict(section="gallery", title=cap, body=f"{A[slug][1]} · {cap.lower()}.", image=A[slug][0], meta=A[slug][1], parent=slug, position=n)
-    for n, (slug, title, year, body) in enumerate(REPORTS, 1):
-        yield dict(section="reports", slug=slug, title=title, body=body, meta=year, position=n)
+            ph = photos[n - 1] if n <= len(photos) else None
+            yield dict(section="gallery", title=cap, meta=A[slug][1], parent=slug, position=n,
+                       image=f"/assets/{ph['file']}" if ph else A[slug][0],
+                       body=f"Photo: {ph['creator']} · {ph['license']}" if ph else "")
+    for n, (slug, title, year, body, pdf) in enumerate(REPORTS, 1):
+        yield dict(section="reports", slug=slug, title=title, body=body, meta=year, image=pdf, position=n)
     for n, (title, value) in enumerate(STATS, 1):
         yield dict(section="stats", title=title, body=value, position=n)
 

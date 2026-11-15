@@ -54,11 +54,12 @@ export default async function Edit({ params, searchParams }: P) {
           </div>
         </form>
         <aside className="space-y-4">
-          {item.image && (
+          {item.image?.endsWith(".pdf") && <a href={item.image} target="_blank" className={`${ghost} w-full justify-center`}>Open PDF ↗</a>}
+          {item.image && !item.image.endsWith(".pdf") && (
             <div className="relative h-48 overflow-hidden rounded-3xl shadow-lift"><Image src={item.image} alt="" fill sizes="300px" className="object-cover" /></div>
           )}
-          {item.slug && ["activities", "stories", "caretakers"].includes(sec) && (
-            <a href={`/${{ activities: "activities", stories: "success-stories", caretakers: "caretakers" }[sec as "activities"]}/${item.slug}`} target="_blank" className={`${ghost} w-full justify-center`}>View on site ↗</a>
+          {item.slug && ["activities", "stories", "caretakers", "reports"].includes(sec) && (
+            <a href={`/${{ activities: "activities", stories: "success-stories", caretakers: "caretakers", reports: "reports" }[sec as "activities"]}/${item.slug}`} target="_blank" className={`${ghost} w-full justify-center`}>View on site ↗</a>
           )}
         </aside>
       </div>

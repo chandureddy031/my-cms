@@ -24,9 +24,17 @@ export function Shell({ logo, mini, children }: { logo: React.ReactNode; mini: R
         className={`glass fixed inset-y-0 left-0 z-50 flex flex-col shadow-lift transition-all duration-300 md:translate-x-0
           ${mobile ? "translate-x-0" : "-translate-x-full"} ${open ? "w-72" : "w-72 md:w-20"}`}
       >
-        <div className="flex items-center justify-between px-5 py-6">
+        <div className={`flex items-center justify-between gap-2 px-5 py-6 ${open ? "" : "md:flex-col md:px-2"}`}>
           <Link href="/" onClick={() => setMobile(false)} className={`text-3xl ${open ? "" : "md:hidden"}`}>{logo}</Link>
           <Link href="/" className={`hidden text-2xl ${open ? "" : "md:block"}`}>{mini}</Link>
+          <button
+            onClick={toggle}
+            aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
+            title={open ? "Collapse" : "Expand"}
+            className="hidden rounded-xl border border-brand-100 bg-white p-2 text-brand-700 shadow-soft transition hover:shadow-glow md:inline-flex"
+          >
+            <Icon name="chevron" className={`h-4 w-4 transition ${open ? "" : "rotate-180"}`} />
+          </button>
           <button onClick={() => setMobile(false)} aria-label="Close menu" className="rounded-xl p-2 text-brand-800 hover:bg-brand-100 md:hidden"><Icon name="close" /></button>
         </div>
         <nav className="flex-1 space-y-1 overflow-y-auto px-3">
@@ -50,14 +58,6 @@ export function Shell({ logo, mini, children }: { logo: React.ReactNode; mini: R
             );
           })}
         </nav>
-        <button
-          onClick={toggle}
-          aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
-          className="m-3 hidden items-center justify-center gap-2 rounded-2xl border border-brand-100 py-2 text-sm text-brand-700 hover:bg-brand-50 md:flex"
-        >
-          <Icon name="chevron" className={`h-4 w-4 transition ${open ? "" : "rotate-180"}`} />
-          <span className={open ? "" : "hidden"}>Collapse</span>
-        </button>
       </aside>
 
       <div className={`transition-all duration-300 ${open ? "md:pl-72" : "md:pl-20"}`}>{children}</div>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBySlug, getSection } from "@/lib/api";
-import { Back, FOCUS, PageHeader } from "@/components/ui";
+import { Back, PageHeader } from "@/components/ui";
 
 type P = { params: Promise<{ slug: string }> };
 
@@ -23,7 +23,7 @@ export default async function Album({ params }: P) {
         {items.map((p, i) => (
           <figure key={p.id} className="reveal mb-6 break-inside-avoid overflow-hidden rounded-3xl border border-brand-100 bg-white lift">
             <a href={p.image!} target="_blank" rel="noreferrer" className={`relative block overflow-hidden ${["h-80", "h-60", "h-72", "h-64", "h-96"][i % 5]}`}>
-              <Image src={p.image!} alt={p.title} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition duration-700 hover:scale-105" style={{ objectPosition: FOCUS[i % FOCUS.length] }} />
+              <Image src={p.image!} alt={p.title} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition duration-700 hover:scale-105" />
             </a>
             <figcaption className="p-5">
               <p className="font-display text-lg font-semibold">{p.title}</p>

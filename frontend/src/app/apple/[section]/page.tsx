@@ -37,7 +37,7 @@ export default async function List({ params, searchParams }: P) {
           <li key={i.id}>
             <Link href={`/apple/${section}/${i.id}`} className="group flex items-center gap-4 rounded-2xl border border-brand-100 bg-white p-4 lift">
               {section === "caretakers" ? <Avatar name={i.title} image={i.image} size="h-16 w-16 text-xl" />
-                : i.image ? <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl"><Image src={i.image} alt="" fill sizes="80px" className="object-cover" /></div>
+                : i.image && !i.image.endsWith(".pdf") ? <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl"><Image src={i.image} alt="" fill sizes="80px" className="object-cover" /></div>
                 : <div className="flex h-16 w-20 shrink-0 items-center justify-center rounded-xl bg-brand-50 font-display text-lg font-bold text-brand-700">{section === "stats" ? i.body : "Aa"}</div>}
               <div className="min-w-0 flex-1">
                 <p className="truncate font-semibold group-hover:text-brand-700">{i.title}</p>

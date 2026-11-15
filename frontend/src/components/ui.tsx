@@ -49,7 +49,7 @@ export function Marquee({ items }: { items: Item[] }) {
       <div className="flex w-max animate-marquee gap-5 hover:[animation-play-state:paused]">
         {[...imgs, ...imgs].map((i, k) => (
           <div key={k} className="relative h-64 w-96 shrink-0 overflow-hidden rounded-3xl shadow-lift">
-            <Image src={i.image!} alt={i.title} fill sizes="384px" className="object-cover" style={{ objectPosition: FOCUS[k % FOCUS.length] }} />
+            <Image src={i.image!} alt={i.title} fill sizes="384px" className="object-cover" />
             <span className="glass absolute bottom-3 left-3 rounded-full px-4 py-1.5 text-sm font-semibold text-brand-900">{i.title}</span>
           </div>
         ))}
@@ -58,8 +58,6 @@ export function Marquee({ items }: { items: Item[] }) {
   );
 }
 
-// Varies the crop when the same photo is reused.
-export const FOCUS = ["center", "20% 30%", "80% 60%", "50% 15%", "30% 85%"];
 
 // Renders CMS text: blank line = new block, "## " = heading, "- " lines = list.
 export function Rich({ text }: { text: string }) {

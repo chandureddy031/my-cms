@@ -41,9 +41,9 @@ export default async function Person({ params }: P) {
         </article>
       </section>
       <section className="px-6 pt-8 md:px-12">
-        <h2 className="mb-6 font-display text-3xl font-bold">Meet the others</h2>
+        <h2 className="mb-6 font-display text-3xl font-bold">Meet the whole team</h2>
         <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-4">
-          {all.filter((x) => x.slug !== slug).slice(0, 4).map((x) => <PersonCard key={x.id} p={x} />)}
+          {all.filter((x) => x.slug !== slug).map((x) => <PersonCard key={x.id} p={x} />)}
         </div>
       </section>
     </>
