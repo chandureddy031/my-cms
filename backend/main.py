@@ -34,7 +34,9 @@ app = FastAPI(title="APPLE API", lifespan=lifespan)
 @app.exception_handler(UniqueViolation)
 def slug_taken(_, __):
     return JSONResponse({"detail": "That slug is already used in this section"}, status_code=409)
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_methods=["*"], allow_headers=["*"])
+# Browsers may call the API only from these sites (donation form). FRONTEND_URL = your live website.
+ORIGINS = ["http://localhost:3000", *filter(None, os.getenv("FRONTEND_URL", "").rstrip("/").split(","))]
+app.add_middleware(CORSMiddleware, allow_origins=ORIGINS, allow_methods=["*"], allow_headers=["*"])
 
 
 def admin(x_admin_key: str = Header("")):
