@@ -32,7 +32,7 @@ export default async function Edit({ params, searchParams }: P) {
       <Title title={id === "new" ? `New ${SECTION_LABELS[sec].replace(/s$/, "").toLowerCase()}` : item.title!} />
       <Notice error={error} />
       <div className="grid gap-8 lg:grid-cols-[1fr_18rem]">
-        <form action={saveItem} className="glass space-y-5 rounded-[2rem] p-8 shadow-lift">
+        <form action={saveItem} className="glass space-y-5 rounded-[2rem] p-5 shadow-lift md:p-8">
           <input type="hidden" name="section" value={sec} />
           <input type="hidden" name="id" value={id === "new" ? "" : id} />
           {fields.map(([k, label]) => {

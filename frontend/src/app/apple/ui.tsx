@@ -13,7 +13,7 @@ export function Title({ title, sub, children }: { title: string; sub?: string; c
   return (
     <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="font-display text-4xl font-bold text-ink">{title}</h1>
+        <h1 className="font-display text-3xl font-bold text-ink md:text-4xl">{title}</h1>
         {sub && <p className="mt-1 text-gray-600">{sub}</p>}
       </div>
       {children}

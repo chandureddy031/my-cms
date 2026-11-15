@@ -10,7 +10,7 @@ export default async function Settings({ searchParams }: { searchParams: Promise
     <div className="mx-auto max-w-3xl">
       <Title title="Site settings" sub="Organisation name (shown in the multicolour logo), tagline, About text and contact details." />
       <Notice error={error} saved={saved} />
-      <form action={saveSite} className="glass space-y-5 rounded-[2rem] p-8 shadow-lift">
+      <form action={saveSite} className="glass space-y-5 rounded-[2rem] p-5 shadow-lift md:p-8">
         {Object.entries(site).map(([k, v]) => (
           <label key={k} className="block">
             <span className="mb-1.5 block text-sm font-semibold capitalize text-gray-700">{k}</span>
