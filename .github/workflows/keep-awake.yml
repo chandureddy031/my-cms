@@ -1,0 +1,20 @@
+name: Keep awake
+
+# Pings both Render services every 30 min so they wake up more often (free plan sleeps after 15 min idle).
+# ponytail: GitHub may delay scheduled runs; for always-on, use a paid Render instance instead.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API and website
+        run: |
+          for url in https://apples-api-1txi.onrender.com/api/stats https://apples-web.onrender.com/; do
+            code=$(curl -s -o /dev/null -m 120 --retry 2 -w '%{http_code}' "$url")
+            echo "$code $url"
+            [ "$code" = 200 ] || exit 1
+          done
