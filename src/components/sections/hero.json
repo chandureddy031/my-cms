@@ -1,1 +1,0 @@
-{ "collectionName": "components_sections_heroes", "info": { "displayName": "Hero" }, "attributes": { "heading": {"type":"string"}, "subheading": {"type":"text"}, "buttonText": {"type":"string"}, "buttonLink": {"type":"string"} } }

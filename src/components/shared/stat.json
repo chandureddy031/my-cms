@@ -1,1 +1,0 @@
-{ "collectionName": "components_shared_stats", "info": { "displayName": "Stat" }, "attributes": { "value": {"type":"string"}, "label": {"type":"string"} } }

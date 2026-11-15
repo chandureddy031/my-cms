@@ -1,1 +1,0 @@
-{ "collectionName": "components_sections_stats", "info": { "displayName": "Stats" }, "attributes": { "heading": {"type":"string"}, "items": {"type":"component","repeatable":true,"component":"shared.stat"} } }

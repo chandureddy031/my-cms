@@ -1,1 +1,0 @@
-{ "collectionName": "components_shared_cards", "info": { "displayName": "Card" }, "attributes": { "icon": {"type":"string"}, "title": {"type":"string"}, "description": {"type":"text"} } }
