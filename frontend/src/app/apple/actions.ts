@@ -7,7 +7,7 @@ import { ADMIN_COOKIE, API_URL } from "@/constants";
 // Calls the API with the editor key; on failure goes back to `back` with the error shown.
 async function call(method: string, path: string, back: string, body?: unknown) {
   const key = (await cookies()).get(ADMIN_COOKIE)?.value ?? "";
-  let msg = "API not running";
+  let msg = "The API is not reachable right now. Please try again in a minute.";
   try {
     const r = await fetch(API_URL + path, {
       method,
@@ -15,7 +15,10 @@ async function call(method: string, path: string, back: string, body?: unknown) 
       body: body === undefined ? undefined : JSON.stringify(body),
     });
     if (r.ok) return void revalidatePath("/", "layout"); // public pages update now, not after 60s
-    msg = r.status === 401 ? "Admin key no longer valid — lock and unlock again" : `${r.status}: ${(await r.text()).slice(0, 300)}`;
+    msg = r.status === 401 ? "Admin key no longer valid — lock and unlock again"
+      : r.status === 422 ? `Please check the fields: ${(await r.text()).slice(0, 300)}`
+      : r.status === 409 ? "That URL slug is already used in this section — pick another."
+      : `Save failed (${r.status}). Please try again.`;
   } catch {}
   redirect(`${back}${back.includes("?") ? "&" : "?"}error=${encodeURIComponent(msg)}`);
 }
@@ -32,9 +35,11 @@ function item(f: FormData) {
 
 export async function unlock(f: FormData) {
   const key = s(f, "key");
-  const ok = await fetch(`${API_URL}/api/admin/check`, { headers: { "X-Admin-Key": key } }).then((r) => r.ok, () => false);
-  if (!ok) redirect("/apple?error=Wrong%20admin%20key%20or%20API%20not%20running");
-  (await cookies()).set(ADMIN_COOKIE, key, { httpOnly: true, sameSite: "strict", path: "/apple", maxAge: 60 * 60 * 8 });
+  const status = await fetch(`${API_URL}/api/admin/check`, { headers: { "X-Admin-Key": key }, cache: "no-store" }).then((r) => r.status, () => 0);
+  if (status !== 200)
+    redirect("/apple?error=" + encodeURIComponent(
+      status === 401 ? "Wrong admin key." : status === 503 ? "The server has no ADMIN_KEY set. Add it on the API service first." : "The API is not reachable right now. Try again in a minute."));
+  (await cookies()).set(ADMIN_COOKIE, key, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict", path: "/apple", maxAge: 60 * 60 * 8 });
   redirect("/apple");
 }
 

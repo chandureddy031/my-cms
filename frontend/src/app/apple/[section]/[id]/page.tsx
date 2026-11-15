@@ -29,7 +29,7 @@ export default async function Edit({ params, searchParams }: P) {
   return (
     <div className="mx-auto max-w-5xl">
       <Link href={`/apple/${sec}`} className="text-sm font-semibold text-brand-700 hover:underline">← {SECTION_LABELS[sec]}</Link>
-      <Title title={id === "new" ? `New ${SECTION_LABELS[sec].replace(/s$/, "").toLowerCase()}` : item.title!} />
+      <Title title={id === "new" ? `Add to ${SECTION_LABELS[sec]}` : item.title!} />
       <Notice error={error} />
       <div className="grid gap-8 lg:grid-cols-[1fr_18rem]">
         <form action={saveItem} className="glass space-y-5 rounded-[2rem] p-5 shadow-lift md:p-8">

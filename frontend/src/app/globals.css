@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Desktop sidebar collapsed: set on <html> before first paint (see layout.tsx), so no flicker. */
+@custom-variant sb-closed (:root[data-sb="closed"] &);
+
 @theme {
   --color-brand-50: #f0fdf4;
   --color-brand-100: #dcfce7;

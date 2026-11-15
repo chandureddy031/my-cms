@@ -3,17 +3,18 @@ import { useEffect, useState } from "react";
 
 const KEY = "apple.sidebar";
 
-// Desktop open/collapsed is remembered per browser; mobile drawer always starts closed.
+// Desktop collapsed state lives on <html data-sb> (set pre-paint by layout.tsx) + localStorage.
+// `open` only mirrors it for labels; the layout itself is pure CSS, so there is no flicker.
 export function useSidebar() {
   const [open, setOpen] = useState(true);
   const [mobile, setMobile] = useState(false);
-  useEffect(() => {
-    try { if (localStorage.getItem(KEY) === "0") setOpen(false); } catch {}
-  }, []);
-  const toggle = () =>
-    setOpen((o) => {
-      try { localStorage.setItem(KEY, o ? "0" : "1"); } catch {}
-      return !o;
-    });
+  useEffect(() => setOpen(document.documentElement.dataset.sb !== "closed"), []);
+  const toggle = () => {
+    const next = !open;
+    if (next) delete document.documentElement.dataset.sb;
+    else document.documentElement.dataset.sb = "closed";
+    try { localStorage.setItem(KEY, next ? "1" : "0"); } catch {}
+    setOpen(next);
+  };
   return { open, toggle, mobile, setMobile };
 }

@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Ping API and website
         run: |
-          for url in https://apples-api-1txi.onrender.com/api/stats https://apples-web.onrender.com/; do
+          for url in https://apples-api-1txi.onrender.com/api/health https://apples-web.onrender.com/; do
             code=$(curl -s -o /dev/null -m 120 --retry 2 -w '%{http_code}' "$url")
             echo "$code $url"
             [ "$code" = 200 ] || exit 1

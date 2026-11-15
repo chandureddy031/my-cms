@@ -22,18 +22,18 @@ export function Shell({ logo, mini, children }: { logo: React.ReactNode; mini: R
 
       <aside
         className={`glass fixed inset-y-0 left-0 z-50 flex flex-col shadow-lift transition-all duration-300 md:translate-x-0
-          ${mobile ? "translate-x-0" : "-translate-x-full"} ${open ? "w-72" : "w-72 md:w-20"}`}
+          ${mobile ? "translate-x-0" : "-translate-x-full"} w-72 md:sb-closed:w-20`}
       >
-        <div className={`flex items-center justify-between gap-2 px-5 py-6 ${open ? "" : "md:flex-col md:px-2"}`}>
-          <Link href="/" onClick={() => setMobile(false)} className={`text-3xl ${open ? "" : "md:hidden"}`}>{logo}</Link>
-          <Link href="/" className={`hidden text-2xl ${open ? "" : "md:block"}`}>{mini}</Link>
+        <div className="flex items-center justify-between gap-2 px-5 py-6 md:sb-closed:flex-col md:sb-closed:px-2">
+          <Link href="/" onClick={() => setMobile(false)} className="text-3xl md:sb-closed:hidden">{logo}</Link>
+          <Link href="/" className="hidden text-2xl md:sb-closed:block">{mini}</Link>
           <button
             onClick={toggle}
             aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
             title={open ? "Collapse" : "Expand"}
             className="hidden rounded-xl border border-brand-100 bg-white p-2 text-brand-700 shadow-soft transition hover:shadow-glow md:inline-flex"
           >
-            <Icon name="chevron" className={`h-4 w-4 transition ${open ? "" : "rotate-180"}`} />
+            <Icon name="chevron" className="h-4 w-4 transition sb-closed:rotate-180" />
           </button>
           <button onClick={() => setMobile(false)} aria-label="Close menu" className="rounded-xl p-2 text-brand-800 hover:bg-brand-100 md:hidden"><Icon name="close" /></button>
         </div>
@@ -53,14 +53,14 @@ export function Shell({ logo, mini, children }: { logo: React.ReactNode; mini: R
                     : on ? "bg-brand-100 text-brand-800 shadow-soft" : "text-gray-600 hover:bg-brand-50 hover:text-brand-800"}`}
               >
                 <Icon name={n.icon} className="h-5 w-5 shrink-0" />
-                <span className={open ? "" : "md:hidden"}>{n.label}</span>
+                <span className="md:sb-closed:hidden">{n.label}</span>
               </Link>
             );
           })}
         </nav>
       </aside>
 
-      <div className={`transition-all duration-300 ${open ? "md:pl-72" : "md:pl-20"}`}>{children}</div>
+      <div className="transition-[padding] duration-300 md:pl-72 md:sb-closed:pl-20">{children}</div>
     </div>
   );
 }

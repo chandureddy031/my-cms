@@ -22,5 +22,8 @@
   },
   "overrides": {
     "magic-string": "0.30.17"
+  },
+  "engines": {
+    "node": ">=20.18 <25"
   }
 }

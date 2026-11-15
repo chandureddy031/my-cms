@@ -14,7 +14,7 @@ const step = "flex h-8 w-8 items-center justify-center rounded-full bg-brand-600
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 export function DonateForm({ causes, initial }: { causes: Cause[]; initial?: string }) {
-  const { status, submit } = useDonate();
+  const { status, error, submit } = useDonate();
   const router = useRouter();
   const [cause, setCause] = useState(causes.find((c) => c.slug === initial)?.label ?? causes[0]?.label ?? "");
   const [amount, setAmount] = useState(AMOUNTS[1]);
@@ -94,14 +94,14 @@ export function DonateForm({ causes, initial }: { causes: Cause[]; initial?: str
           <p className="mt-3 font-display text-5xl font-bold">{inr(total)}</p>
           <p className="mt-2 text-brand-50">to <strong>{cause}</strong></p>
           <ul className="mt-6 space-y-2 text-sm text-brand-50">
-            {["Goes directly to the programme", "Audited and reported yearly", "Receipt sent to your email"].map((t) => (
+            {["Goes directly to the programme", "Audited and reported yearly", "Our team will contact you to complete it"].map((t) => (
               <li key={t} className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-brand-200" />{t}</li>
             ))}
           </ul>
           <button disabled={status === "sending"} className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-white py-4 font-semibold text-brand-800 shadow-soft transition hover:shadow-glow disabled:opacity-60">
             <Icon name="heart" /> {status === "sending" ? "Sending…" : `Donate ${inr(total)}`}
           </button>
-          {status === "error" && <p role="alert" className="mt-4 rounded-xl bg-white/15 p-3 text-center text-sm">Something went wrong. Please check your details and try again.</p>}
+          {status === "error" && <p role="alert" className="mt-4 rounded-xl bg-white/15 p-3 text-center text-sm">{error}</p>}
         </div>
       </aside>
     </form>
