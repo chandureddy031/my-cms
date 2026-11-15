@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-200: #bbf7d0;
+  --color-brand-300: #86efac;
+  --color-brand-400: #4ade80;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+  --color-brand-800: #166534;
+  --color-brand-900: #14532d;
+  --color-ink: #10231a;
+
+  --font-display: var(--ff-display), Georgia, serif;
+  --font-sans: var(--ff-sans), system-ui, sans-serif;
+
+  /* green-tinted layered shadows */
+  --shadow-soft: 0 1px 2px rgb(20 83 45 / 0.06), 0 8px 24px -12px rgb(20 83 45 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(20 83 45 / 0.06), 0 24px 48px -16px rgb(20 83 45 / 0.32);
+  --shadow-glow: 0 0 0 1px rgb(34 197 94 / 0.25), 0 12px 40px -8px rgb(34 197 94 / 0.45);
+
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+}
+
+body {
+  background:
+    radial-gradient(60rem 40rem at 110% -10%, rgb(187 247 208 / 0.55), transparent 60%),
+    radial-gradient(50rem 30rem at -10% 30%, rgb(220 252 231 / 0.7), transparent 60%),
+    #fff;
+  background-attachment: fixed;
+  color: var(--color-ink);
+}
+
+/* frosted panel */
+@utility glass {
+  background: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgb(255 255 255 / 0.9);
+}
+
+/* card that lifts on hover */
+@utility lift {
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s;
+  &:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+}
+
+/* gradient text */
+@utility text-shine {
+  background: linear-gradient(100deg, var(--color-brand-900), var(--color-brand-600) 45%, #65a30d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* fade-up as it scrolls into view (CSS scroll-driven animation; no-op where unsupported) */
+@keyframes reveal { from { opacity: 0; transform: translateY(32px) scale(0.98); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .animate-marquee, .animate-float { animation: none !important; }
+}
