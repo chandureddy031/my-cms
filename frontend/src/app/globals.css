@@ -69,3 +69,127 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .reveal, .animate-marquee, .animate-float { animation: none !important; }
 }
+
+/* ---------- Mascot (Appu): one animation set per mood; parts pivot on their own box ---------- */
+.mascot { overflow: visible; transition: transform .12s ease-out; }
+.mascot.m-springing { transition: transform .7s cubic-bezier(.34,1.8,.5,1); } /* drag release: springs home */
+.mascot g, .mascot path, .mascot ellipse, .mascot rect, .mascot text, .mascot circle { transform-box: fill-box; }
+.mascot .m-root { transform-origin: 50% 100%; animation: m-breathe 4.8s ease-in-out infinite; }
+.mascot .m-head { transform-origin: 50% 90%; animation: m-look 6s ease-in-out infinite; }
+.mascot .m-eye { transform-origin: 50% 50%; animation: m-blink 5.2s infinite; }
+.mascot .m-eye-r { animation-delay: .04s; }
+.mascot .m-pupil { transform: translate(var(--lx, 0px), var(--ly, 0px)); transition: transform .15s ease-out; }
+.mascot .m-spiral, .mascot .m-sweat { opacity: 0; }
+.mascot .m-arm-l, .mascot .m-arm-r { transform-origin: 50% 8%; transition: transform .35s cubic-bezier(.3,1.4,.5,1); }
+.mascot .m-tuft { transform-origin: 30% 100%; animation: m-tuft 3s ease-in-out infinite; }
+.mascot .m-cheek { opacity: .3; transition: opacity .3s; }
+.mascot .m-brows { transition: transform .3s; }
+.mascot .m-shadow { transform-origin: 50% 50%; animation: m-shadow 4.8s ease-in-out infinite; }
+.m-caret { animation: m-caret .8s steps(1) infinite; color: var(--color-brand-600); }
+.m-bubble { animation: m-bubble .35s cubic-bezier(.3,1.5,.5,1); transform-origin: 85% 100%; }
+
+@keyframes m-breathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.012,.985) translateY(-1px); } }
+@keyframes m-look { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-3deg); } 60% { transform: rotate(3deg); } }
+@keyframes m-blink { 0%,40%,43%,88%,90%,93%,95%,100% { transform: scaleY(1); } 41.5%,89%,94% { transform: scaleY(.08); } }
+@keyframes m-tuft { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(6deg); } }
+@keyframes m-shadow { 0%,100% { transform: scaleX(1); } 50% { transform: scaleX(.96); } }
+@keyframes m-caret { 50% { opacity: 0; } }
+@keyframes m-bubble { from { opacity: 0; transform: scale(.85) translateY(8px); } }
+@keyframes m-hop { 0% { transform: translateY(0) scale(1.06,.9); } 45% { transform: translateY(-14px) scale(.96,1.05); } 100% { transform: translateY(0); } }
+@keyframes m-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes m-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-1.5px); } 75% { transform: translateX(1.5px); } }
+@keyframes m-pop { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.15); } }
+
+/* hello: hop once and wave */
+.mascot[data-mood="hello"] .m-root { animation: m-hop .7s cubic-bezier(.3,1.6,.5,1) 1, m-breathe 4.8s ease-in-out .7s infinite; }
+.mascot[data-mood="hello"] .m-arm-r { animation: m-wave .45s ease-in-out 5 alternate; }
+@keyframes m-wave { from { transform: rotate(-150deg); } to { transform: rotate(-195deg); } }
+
+/* happy / giggle: bouncy, cheeks pink */
+.mascot[data-mood="happy"] .m-root { animation: m-bounce 1.1s ease-in-out infinite; }
+.mascot[data-mood="happy"] .m-cheek, .mascot[data-mood="love"] .m-cheek { opacity: .55; }
+
+/* celebrate: jumps with both arms up, confetti falls */
+.mascot[data-mood="celebrate"] .m-root { animation: m-hop .6s cubic-bezier(.3,1.6,.5,1) infinite; }
+.mascot[data-mood="celebrate"] .m-arm-l, .mascot[data-mood="excited"] .m-arm-l { transform: rotate(150deg); }
+.mascot[data-mood="celebrate"] .m-arm-r, .mascot[data-mood="excited"] .m-arm-r { transform: rotate(-150deg); }
+.mascot .m-confetti rect { animation: m-fall 1.4s ease-in infinite; }
+.mascot .m-confetti rect:nth-child(2n) { animation-delay: .35s; }
+.mascot .m-confetti rect:nth-child(3n) { animation-delay: .7s; }
+@keyframes m-fall { from { transform: translateY(-6px) rotate(0); opacity: 1; } to { transform: translateY(60px) rotate(220deg); opacity: 0; } }
+
+/* excited: fast bounce, arms up, wiggling */
+.mascot[data-mood="excited"] .m-root { animation: m-bounce .45s ease-in-out infinite; }
+.mascot[data-mood="excited"] .m-brows { transform: translateY(-2px); }
+
+/* thinking: head tilted, hand to chin */
+.mascot[data-mood="thinking"] .m-head { animation: none; transform: rotate(-8deg); }
+.mascot[data-mood="thinking"] .m-arm-r { transform: rotate(-145deg) translateY(2px); }
+.mascot[data-mood="thinking"] .m-pupil { transform: translate(1.5px, -2px); }
+.mascot .m-prop { transform-origin: 50% 100%; animation: m-pop 1.6s ease-in-out infinite; }
+
+/* presenting: arm out, pointing at the page */
+.mascot[data-mood="presenting"] .m-arm-l { animation: m-point 2.4s ease-in-out infinite; }
+@keyframes m-point { 0%,100% { transform: rotate(60deg); } 50% { transform: rotate(75deg); } }
+
+/* listening: leans in while you type, eyes on the form */
+.mascot[data-mood="listening"] .m-head { animation: none; transform: rotate(-6deg) translateX(-1px); }
+.mascot[data-mood="listening"] .m-pupil { transform: translate(-2px, 1px); }
+.mascot[data-mood="listening"] .m-arm-r { transform: rotate(-150deg) translateX(3px); }
+
+/* worried: shakes, brows up, sweat drop */
+.mascot[data-mood="worried"] .m-root { animation: m-shake .5s ease-in-out infinite; }
+.mascot[data-mood="worried"] .m-brows { transform: translateY(-2px); }
+.mascot[data-mood="worried"] .m-sweat, .mascot[data-mood="shy"] .m-sweat { opacity: 1; animation: m-drip 1.6s ease-in infinite; }
+@keyframes m-drip { from { transform: translateY(0); opacity: 1; } to { transform: translateY(8px); opacity: 0; } }
+
+/* sorry: head bows, eyes half shut */
+.mascot[data-mood="sorry"] .m-head { animation: none; transform: rotate(6deg) translateY(3px); }
+.mascot[data-mood="sorry"] .m-eye { animation: none; transform: scaleY(.45); }
+
+/* shy (hover / someone tries to drag him): covers his cheeks, looks down, blushes */
+.mascot[data-mood="shy"] .m-arm-l { transform: rotate(-142deg); }
+.mascot[data-mood="shy"] .m-arm-r { transform: rotate(142deg); }
+.mascot[data-mood="shy"] .m-head { animation: none; transform: rotate(5deg) translateY(2px); }
+.mascot[data-mood="shy"] .m-pupil { transform: translate(-1.5px, 2.2px); }
+.mascot[data-mood="shy"] .m-cheek { opacity: .85; }
+.mascot[data-mood="shy"] .m-root { animation: m-shake 1.2s ease-in-out infinite; }
+
+/* love (long press = hug): squeezes himself, eyes closed happy, hearts float up */
+.mascot[data-mood="love"] .m-root { animation: m-squeeze 1s ease-in-out infinite; }
+.mascot[data-mood="love"] .m-eye { animation: none; transform: scaleY(.25); }
+.mascot[data-mood="love"] .m-arm-l { transform: rotate(-60deg); }
+.mascot[data-mood="love"] .m-arm-r { transform: rotate(60deg); }
+.mascot .m-hearts path { animation: m-float 1.8s ease-out infinite; }
+.mascot .m-hearts path:nth-child(2) { animation-delay: .5s; }
+.mascot .m-hearts path:nth-child(3) { animation-delay: 1s; }
+@keyframes m-squeeze { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04,.96); } }
+@keyframes m-float { from { transform: translateY(6px) scale(.6); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(-14px) scale(1.1); opacity: 0; } }
+
+/* dizzy (4 fast taps): head wobbles, spiral eyes spin */
+.mascot[data-mood="dizzy"] .m-head { animation: m-wobble .9s ease-in-out infinite; }
+.mascot[data-mood="dizzy"] .m-pupil { opacity: 0; }
+.mascot[data-mood="dizzy"] .m-spiral { opacity: 1; transform-origin: 50% 50%; animation: m-spin .8s linear infinite; }
+.mascot[data-mood="dizzy"] .m-eye { animation: none; }
+@keyframes m-wobble { 0%,100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
+@keyframes m-spin { to { transform: rotate(360deg); } }
+
+/* wink (double-click) */
+.mascot[data-mood="wink"] .m-eye-r { animation: none; transform: scaleY(.1); }
+.mascot[data-mood="wink"] .m-brow-r { transform: translateY(2px); }
+.mascot[data-mood="wink"] .m-head { animation: none; transform: rotate(-5deg); }
+
+/* surprised (fast scroll): small jump, eyes wide */
+.mascot[data-mood="surprised"] .m-root { animation: m-hop .5s cubic-bezier(.3,1.6,.5,1) 1; }
+.mascot[data-mood="surprised"] .m-eye { animation: none; transform: scale(1.18); }
+.mascot[data-mood="surprised"] .m-brows { transform: translateY(-3px); }
+
+/* sleepy: eyes shut, slow breathing, floating Zz */
+.mascot[data-mood="sleepy"] .m-root { animation-duration: 6s; }
+.mascot[data-mood="sleepy"] .m-eye { animation: none; transform: scaleY(.1); }
+.mascot[data-mood="sleepy"] .m-head { animation: none; transform: rotate(-6deg); }
+.mascot .m-zzz text { animation: m-zz 2.4s ease-out infinite; }
+.mascot .m-zzz text:nth-child(2) { animation-delay: 1.2s; }
+@keyframes m-zz { from { transform: translate(0,6px); opacity: 0; } 30% { opacity: 1; } to { transform: translate(6px,-10px); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) { .mascot *, .m-bubble, .m-caret { animation: none !important; transition: none !important; } }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AMOUNTS } from "@/constants";
 import { useDonate } from "@/hooks/useDonate";
+import { mascot } from "@/lib/mascotBus";
 import { Icon } from "./Icon";
 
 type Cause = { slug: string; title: string; label: string; image: string | null; body: string };
@@ -22,10 +23,12 @@ export function DonateForm({ causes, initial }: { causes: Cause[]; initial?: str
   const total = Number(custom) || amount;
 
   useEffect(() => {
+    if (status === "error") mascot("sorry", error);
     if (status !== "done") return;
+    mascot("celebrate", "Thank you so much! Your kindness reaches a real person. 💚");
     const t = setTimeout(() => router.push("/"), 4000);
     return () => clearTimeout(t);
-  }, [status, router]);
+  }, [status, router, error]);
 
   if (status === "done")
     return (
