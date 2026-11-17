@@ -10,7 +10,9 @@ from typing import Literal
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from psycopg import OperationalError
 from psycopg.errors import UniqueViolation
+from psycopg_pool import PoolTimeout
 from psycopg.rows import dict_row
 from psycopg_pool import ConnectionPool
 from pydantic import BaseModel, EmailStr, Field
@@ -23,14 +25,18 @@ ADMIN_KEY = os.getenv("ADMIN_KEY") or (None if PROD else "apple-admin")
 ADMIN_READY = bool(ADMIN_KEY) and (not PROD or (len(ADMIN_KEY) >= 12 and ADMIN_KEY != "apple-admin"))
 Section = Literal["activities", "reports", "stories", "gallery", "caretakers", "stats"]
 SITE_KEYS = {"name", "tagline", "about", "mission", "vision", "email", "phone"}
-pool = ConnectionPool(DSN, open=False, kwargs={"row_factory": dict_row})
+# Short timeouts so a dead database gives a clear 503 in seconds instead of hanging requests.
+pool = ConnectionPool(DSN, open=False, timeout=8, kwargs={"row_factory": dict_row, "connect_timeout": 5})
 
 
 @asynccontextmanager
 async def lifespan(_):
-    pool.open()
-    with pool.connection() as c:
-        c.execute(Path(__file__).with_name("schema.sql").read_text())
+    pool.open(wait=False)
+    try:  # start even if the DB is down, so /api/health can say "database" instead of the API looking dead
+        with pool.connection() as c:
+            c.execute(Path(__file__).with_name("schema.sql").read_text())
+    except (OperationalError, PoolTimeout) as e:
+        print("startup: database unavailable:", e)
     yield
     pool.close()
 
@@ -40,6 +46,19 @@ app = FastAPI(title="APPLE API", lifespan=lifespan, docs_url=None if PROD else "
 # Browsers may call the API only from these sites (donation form). FRONTEND_URL = comma-separated live website URLs.
 ORIGINS = ["http://localhost:3000", *(o.strip().rstrip("/") for o in os.getenv("FRONTEND_URL", "").split(",") if o.strip())]
 app.add_middleware(CORSMiddleware, allow_origins=ORIGINS, allow_methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type", "X-Admin-Key"])
+
+
+# Every error says where it came from: {"detail": ..., "source": "database" | "api"}.
+@app.exception_handler(OperationalError)
+@app.exception_handler(PoolTimeout)
+def db_down(_, __):
+    return JSONResponse({"detail": "Database unavailable", "source": "database"}, status_code=503)
+
+
+@app.exception_handler(Exception)
+def crashed(_, e):
+    print("unhandled error:", repr(e))
+    return JSONResponse({"detail": "Internal API error", "source": "api"}, status_code=500)
 
 
 @app.exception_handler(UniqueViolation)
@@ -102,9 +121,14 @@ COLS = list(Content.model_fields)
 
 @app.get("/api/health")
 def health():
-    with pool.connection() as c:
-        c.execute("SELECT 1")
-    return {"ok": True, "admin": ADMIN_READY}
+    try:
+        with pool.connection(timeout=5) as c:
+            c.execute("SELECT 1")
+        db = "ok"
+    except (OperationalError, PoolTimeout):
+        db = "down"
+    body = {"ok": db == "ok", "api": "ok", "database": db, "admin": ADMIN_READY}
+    return JSONResponse(body, status_code=200 if db == "ok" else 503)
 
 
 @app.get("/api/site")

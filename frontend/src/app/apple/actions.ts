@@ -3,11 +3,12 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ADMIN_COOKIE, API_URL } from "@/constants";
+import { FAULT_TEXT, faultFrom } from "@/lib/diagnose";
 
 // Calls the API with the editor key; on failure goes back to `back` with the error shown.
 async function call(method: string, path: string, back: string, body?: unknown) {
   const key = (await cookies()).get(ADMIN_COOKIE)?.value ?? "";
-  let msg = "The API is not reachable right now. Please try again in a minute.";
+  let msg = FAULT_TEXT.backend;
   try {
     const r = await fetch(API_URL + path, {
       method,
@@ -18,7 +19,7 @@ async function call(method: string, path: string, back: string, body?: unknown) 
     msg = r.status === 401 ? "Admin key no longer valid — lock and unlock again"
       : r.status === 422 ? `Please check the fields: ${(await r.text()).slice(0, 300)}`
       : r.status === 409 ? "That URL slug is already used in this section — pick another."
-      : `Save failed (${r.status}). Please try again.`;
+      : await faultFrom(r);
   } catch {}
   redirect(`${back}${back.includes("?") ? "&" : "?"}error=${encodeURIComponent(msg)}`);
 }
@@ -35,10 +36,12 @@ function item(f: FormData) {
 
 export async function unlock(f: FormData) {
   const key = s(f, "key");
-  const status = await fetch(`${API_URL}/api/admin/check`, { headers: { "X-Admin-Key": key }, cache: "no-store" }).then((r) => r.status, () => 0);
-  if (status !== 200)
+  const r = await fetch(`${API_URL}/api/admin/check`, { headers: { "X-Admin-Key": key }, cache: "no-store" }).catch(() => null);
+  if (r?.status !== 200)
     redirect("/apple?error=" + encodeURIComponent(
-      status === 401 ? "Wrong admin key." : status === 503 ? "The server has no ADMIN_KEY set. Add it on the API service first." : "The API is not reachable right now. Try again in a minute."));
+      r?.status === 401 ? "Wrong admin key."
+        : r?.status === 503 && !(await r.clone().json().catch(() => ({}))).source ? "The server has no ADMIN_KEY set (or it is shorter than 12 characters)."
+        : await faultFrom(r)));
   (await cookies()).set(ADMIN_COOKIE, key, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict", path: "/apple", maxAge: 60 * 60 * 8 });
   redirect("/apple");
 }

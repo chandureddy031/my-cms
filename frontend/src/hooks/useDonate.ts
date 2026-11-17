@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { API_URL } from "@/constants";
+import { FAULT_TEXT, faultFrom } from "@/lib/diagnose";
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -22,9 +23,9 @@ export function useDonate() {
         body: JSON.stringify({ ...rest, amount: Number(custom || amount) }),
       });
       if (r.ok) return setStatus("done");
-      setError(MESSAGES[r.status] ?? "Something went wrong on our side. Please try again.");
+      setError(MESSAGES[r.status] ?? (await faultFrom(r)));
     } catch {
-      setError("Couldn't reach our server. It may be waking up — please try again in a few seconds.");
+      setError(FAULT_TEXT.backend);
     }
     setStatus("error");
   }
