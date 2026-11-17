@@ -37,7 +37,7 @@ export function useMascot() {
 
   useEffect(() => { try { setHidden(localStorage.getItem(HIDDEN_KEY) === "1"); } catch { setHidden(false); } }, []);
 
-  // Page tip on every navigation; greeting bubble pops on the first page of a visit (wide screens only).
+  // Page tip on every navigation; he waves hello on the first page of a visit.
   useEffect(() => {
     const tip = tipFor(path);
     let greeted = false;
@@ -45,7 +45,7 @@ export function useMascot() {
     base.current = tip?.mood === "hello" ? "idle" : tip?.mood ?? "idle";
     setMood(tip?.mood === "hello" && greeted ? "happy" : tip?.mood ?? "idle");
     if (tip) setText(tip.text);
-    setOpen(!greeted && window.matchMedia("(min-width: 768px)").matches);
+    setOpen(false); // bubble opens on tap only, so it never covers the page
   }, [path]);
 
   useEffect(() => onMascot((e) => show(e.mood, e.text)), [show]);

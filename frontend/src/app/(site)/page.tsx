@@ -32,12 +32,12 @@ export default async function Home() {
         </div>
         <div className="relative hidden h-[30rem] lg:block">
           {hero.map((a, i) => (
-            <Link key={a.id} href={`/activities/${a.slug}`}
+            <div key={a.id}
               className={`absolute overflow-hidden rounded-[2rem] ring-8 ring-white shadow-lift transition hover:z-10 hover:scale-105
                 ${["left-0 top-6 h-72 w-60 -rotate-6", "right-4 top-0 h-80 w-64 rotate-3", "bottom-0 left-28 h-60 w-72 -rotate-2"][i]}`}>
               <Image src={a.image!} alt={a.title} fill sizes="300px" className="object-cover" priority />
               <span className="glass absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-bold text-brand-800">{a.meta}</span>
-            </Link>
+            </div>
           ))}
         </div>
       </section>
