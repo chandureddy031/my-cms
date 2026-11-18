@@ -19,8 +19,8 @@ export const greeting = () => {
 
 // Tip shown when the visitor lands on a page (longest matching prefix wins). {greeting} is filled in.
 export const PAGE_TIPS: { path: string; mood: Mood; text: string }[] = [
-  { path: "/", mood: "hello", text: "{greeting}! I'm Appu 👋 We care for elders, children, health, disability, careers and farms. Tap a question to learn more." },
-  { path: "/about", mood: "presenting", text: "Meet the team behind APPLE — tap any person to read about them." },
+  { path: "/", mood: "hello", text: "{greeting}! I'm Appu 👋 APPLES works for elders, children, women, mental health, livelihoods and farmers in Anantapur. Tap a question to learn more." },
+  { path: "/about", mood: "presenting", text: "Meet the team behind APPLES — tap any person to read about them." },
   { path: "/activities", mood: "presenting", text: "Open any programme to see exactly what we do and how your gift helps." },
   { path: "/reports", mood: "thinking", text: "Every report opens right here — tap “View report”." },
   { path: "/success-stories", mood: "happy", text: "These are real lives your support has changed." },
@@ -33,10 +33,10 @@ export const PAGE_TIPS: { path: string; mood: Mood; text: string }[] = [
 // Quick questions: fixed answers, optional link.
 export const FAQ: { q: string; a: string; href?: string; label?: string; mood: Mood }[] = [
   { q: "How do I donate?", a: "Choose a cause, pick an amount and add your name and email. Our team contacts you to complete it.", href: "/donate", label: "Donate now", mood: "excited" },
-  { q: "Where does my money go?", a: "Straight to the programme you choose. Our reports show every rupee.", href: "/reports", label: "See reports", mood: "presenting" },
-  { q: "What do you work on?", a: "Elder care, education, community health, disability wellbeing, careers and agriculture.", href: "/activities", label: "Our activities", mood: "presenting" },
-  { q: "Who runs APPLE?", a: "A team of caretakers from the villages we serve, led by our founders.", href: "/about", label: "Meet the team", mood: "happy" },
-  { q: "How can I contact you?", a: "Every caretaker's profile has email and phone buttons, and our contact is in the footer.", href: "/caretakers", label: "Caretakers", mood: "presenting" },
+  { q: "Where does my money go?", a: "Straight to the programme you choose.", href: "/reports", label: "See reports", mood: "presenting" },
+  { q: "What do you work on?", a: "Elder care, education and child rights, mental health, women and child empowerment, livelihoods and natural farming.", href: "/activities", label: "Our activities", mood: "presenting" },
+  { q: "Who runs APPLES?", a: "APPLES was founded in 1995 by Mr S. Thirupal, our Secretary, inspired by Sri S.R. Sankaran IAS.", href: "/about", label: "Meet the team", mood: "happy" },
+  { q: "How can I contact you?", a: "Email applesngo4u@gmail.com or call +91 94901 94281. Our address is in the footer.", href: "/caretakers", label: "Caretakers", mood: "presenting" },
 ];
 
 // What he says when you play with him.

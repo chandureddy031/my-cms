@@ -29,12 +29,12 @@ export function Card({ item, href, cta = "Read more" }: { item: Item; href?: str
         {!item.image && item.meta && <span className="text-xs font-bold uppercase tracking-widest text-brand-600">{item.meta}</span>}
         <h3 className="mt-1 font-display text-xl font-semibold text-ink">{item.title}</h3>
         {item.body && <p className="mt-2 text-sm leading-relaxed text-gray-600">{item.body}</p>}
-        {href && <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-700">{cta} <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" /></span>}
+        {href && <Link href={href} className="group/cta mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-900">{cta} <Icon name="arrow" className="h-4 w-4 transition group-hover/cta:translate-x-1" /></Link>}
       </div>
     </>
   );
-  const cls = "reveal group block overflow-hidden rounded-3xl border border-brand-100 bg-white lift";
-  return href ? <Link href={href} className={cls}>{inner}</Link> : <article className={cls}>{inner}</article>;
+  // Only the CTA link navigates; the image and the rest of the card do not.
+  return <article className="reveal group block overflow-hidden rounded-3xl border border-brand-100 bg-white lift">{inner}</article>;
 }
 
 export function Grid({ children, empty }: { children: React.ReactNode[]; empty?: string }) {
@@ -65,7 +65,13 @@ export function Rich({ text }: { text: string }) {
     <div className="space-y-5 text-[1.05rem] leading-relaxed text-gray-700">
       {text.split(/\n\s*\n/).map((b, i) => {
         const lines = b.trim().split("\n");
-        if (b.trim().startsWith("## ")) return <h2 key={i} className="pt-4 font-display text-2xl font-semibold text-brand-900">{b.trim().slice(3)}</h2>;
+        if (lines[0].startsWith("## "))
+          return (
+            <div key={i} className="space-y-5">
+              <h2 className="pt-4 font-display text-2xl font-semibold text-brand-900">{lines[0].slice(3)}</h2>
+              {lines.length > 1 && <p className="whitespace-pre-line">{lines.slice(1).join("\n")}</p>}
+            </div>
+          );
         if (lines.every((l) => l.startsWith("- ")))
           return (
             <ul key={i} className="grid gap-3 sm:grid-cols-2">
@@ -84,7 +90,7 @@ export function Rich({ text }: { text: string }) {
 }
 
 export function Avatar({ name, image, size = "h-24 w-24 text-3xl" }: { name: string; image?: string | null; size?: string }) {
-  const initials = name.replace(/^(Dr|S)\.\s*/, "").split(/\s+/).map((w) => w[0]).slice(0, 2).join("");
+  const initials = name.replace(/^Dr\.\s*/, "").split(/\s+/).map((w) => w[0]).slice(0, 2).join("");
   return image ? (
     <div className={`relative shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-glow ${size}`}>
       <Image src={image} alt={name} fill sizes="200px" className="object-cover" />

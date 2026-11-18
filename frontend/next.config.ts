@@ -15,8 +15,8 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: "/(.*)", headers: security },
-      // ponytail: 1-day browser cache; a replaced image under the same name can take up to a day to show
-      { source: "/assets/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }] },
+      // 5-minute browser cache: images are replaced under the same file names, so a long cache would keep showing old photos.
+      { source: "/assets/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=300" }] },
     ];
   },
 };

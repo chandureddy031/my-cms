@@ -1,14 +1,15 @@
 import { getSection, getSite } from "@/lib/api";
-import { CTA, Grid, PageHeader, PersonCard } from "@/components/ui";
+import { CTA, Grid, PageHeader, PersonCard, Rich } from "@/components/ui";
+import { ABOUT_STORY } from "@/constants";
 import { Icon } from "@/components/Icon";
 
 export const metadata = { title: "About Us" };
 
-const VALUES = [
-  ["heart", "Compassion", "We treat every person as family."],
-  ["doc", "Transparency", "Audited accounts and public reports every year."],
-  ["people", "Community-led", "Our caretakers come from the villages they serve."],
-  ["spark", "Lasting change", "We build skills and systems, not dependence."],
+const VALUES = [ // from the Organisation Profile
+  ["heart", "Charitable", "Built on love and concern for poor, vulnerable and marginalised communities."],
+  ["people", "Secular", "We serve every community, whatever their faith or background."],
+  ["doc", "Non-political", "Independent of any political party."],
+  ["spark", "Non-profit", "A registered society since 1995 (Reg. No. 154)."],
 ];
 
 export default async function About() {
@@ -37,6 +38,10 @@ export default async function About() {
         ))}
       </section>
 
+      <section className="px-6 pb-16 md:px-12">
+        <article className="reveal glass rounded-[2rem] p-8 shadow-soft md:p-12"><Rich text={ABOUT_STORY} /></article>
+      </section>
+
       <div className="px-6 pb-8 md:px-12">
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand-600">Our people</p>
         <h2 className="mt-2 font-display text-4xl font-bold">The team behind the work</h2>
@@ -52,7 +57,7 @@ export default async function About() {
         </div>
       </section>
 
-      <CTA title="Walk with us." sub="Volunteer, partner or donate — every hand helps a village move forward." />
+      <CTA title="Walk with us." sub="CSR partners, foundations, donors and volunteers — join hands with APPLES." />
     </>
   );
 }

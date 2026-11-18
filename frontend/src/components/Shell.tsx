@@ -24,7 +24,7 @@ export function Shell({ logo, mini, children }: { logo: React.ReactNode; mini: R
         className={`glass fixed inset-y-0 left-0 z-50 flex flex-col shadow-lift transition-all duration-300 md:translate-x-0
           ${mobile ? "translate-x-0" : "-translate-x-full"} w-72 md:sb-closed:w-20`}
       >
-        <div className="flex items-center justify-between gap-2 px-5 py-6 md:sb-closed:flex-col md:sb-closed:px-2">
+        <div className="flex items-center justify-between gap-2 px-5 py-6 md:sb-closed:flex-col-reverse md:sb-closed:px-2">
           <Link href="/" onClick={() => setMobile(false)} className="text-3xl md:sb-closed:hidden">{logo}</Link>
           <Link href="/" className="hidden text-2xl md:sb-closed:block">{mini}</Link>
           <button

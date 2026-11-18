@@ -9,7 +9,7 @@ export default async function Reports() {
   const items = await getSection("reports");
   return (
     <>
-      <PageHeader eyebrow="Transparency" title="Reports" sub="Every rupee we receive and spend, reported openly." />
+      <PageHeader eyebrow="Transparency" title="Reports" sub="Reports and documents about our work." />
       <section className="px-6 pb-16 md:px-12">
         <div className="reveal mb-8 rounded-[2rem] bg-gradient-to-br from-brand-700 to-brand-500 p-8 text-white shadow-glow md:p-10">
           <h2 className="font-display text-3xl font-bold">Want to see our reports?</h2>

@@ -7,7 +7,7 @@ export default async function Activities() {
   const items = await getSection("activities");
   return (
     <>
-      <PageHeader eyebrow="Our work" title="Activities" sub="Elder care, education, health, disability wellbeing, careers and agriculture. Open any programme to see exactly what we do and how." />
+      <PageHeader eyebrow="Our work" title="Activities" sub="Elder care, education and child rights, mental health, women and child empowerment, livelihoods and natural farming. Open any programme to see exactly what we do and how." />
       <Grid>{items.map((a) => <Card key={a.id} item={a} href={`/activities/${a.slug}`} cta="See how we work" />)}</Grid>
     </>
   );

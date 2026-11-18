@@ -17,6 +17,8 @@ export function Footer({ site }: { site: Site }) {
         <div className="text-sm text-gray-600">
           <p><a href={`mailto:${site.email}`} className="hover:text-brand-700">{site.email}</a></p>
           <p className="mt-1"><a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-brand-700">{site.phone}</a></p>
+          <p className="mt-3 max-w-xs">{site.address}</p>
+          <p className="mt-1 max-w-xs">{site.office}</p>
         </div>
       </div>
       <p className="mt-10 text-xs text-gray-400">© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
