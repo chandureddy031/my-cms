@@ -1,0 +1,21 @@
+/* /website: one-page site with its own calm palette (warm paper, charcoal, walnut). */
+@theme {
+  --color-ws-paper: #f6f3ee;
+  --color-ws-card: #fffdf9;
+  --color-ws-ink: #1c1917;
+  --color-ws-muted: #6b645c;
+  --color-ws-line: #e4ded4;
+  --color-ws-accent: #8a5a3c;
+}
+
+/* Header links scroll smoothly; sections stop below the sticky header. */
+html:has(.ws-page) { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html:has(.ws-page) { scroll-behavior: auto; } }
+.ws-page section[id] { scroll-margin-top: 5rem; }
+
+@utility ws-x { @apply mx-auto w-full max-w-6xl px-4 sm:px-8; }
+@utility ws-eyebrow { @apply text-xs font-semibold uppercase tracking-[0.22em] text-ws-accent; }
+@utility ws-heading { @apply font-display text-4xl font-medium leading-tight tracking-tight text-ws-ink sm:text-5xl; }
+@utility ws-button { @apply inline-flex items-center justify-center rounded-full bg-ws-ink px-6 py-3 text-sm font-semibold text-ws-paper transition hover:bg-ws-accent; }
+@utility ws-button-ghost { @apply inline-flex items-center justify-center rounded-full border border-ws-ink/25 px-6 py-3 text-sm font-semibold text-ws-ink transition hover:border-ws-ink; }
+@utility ws-input { @apply w-full rounded-xl border border-ws-line bg-ws-card px-4 py-3 text-sm text-ws-ink outline-none transition placeholder:text-ws-muted/70 focus:border-ws-ink; }
