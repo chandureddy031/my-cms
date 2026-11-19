@@ -1,0 +1,62 @@
+/* Custom utilities. */
+
+/* frosted panel */
+@utility glass {
+  background: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgb(255 255 255 / 0.9);
+}
+
+/* card that lifts on hover */
+@utility lift {
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s;
+  &:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+}
+
+/* gradient text */
+@utility text-shine {
+  background: linear-gradient(100deg, var(--color-brand-900), var(--color-brand-600) 45%, #65a30d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Named styles: every class string used in more than one component ---------- */
+
+/* page gutter */
+@utility page-x { @apply px-6 md:px-12; }
+@utility page-mx { @apply mx-6 md:mx-12; }
+
+/* small uppercase line above a heading */
+@utility eyebrow { @apply text-xs font-bold uppercase tracking-[0.25em] text-brand-600; }
+/* category / year label on cards */
+@utility meta-label { @apply text-xs font-bold uppercase tracking-widest text-brand-600; }
+
+@utility heading-section { @apply font-display text-3xl font-bold; }
+
+/* frosted label chip on photos */
+@utility pill { @apply glass rounded-full px-3 py-1 text-xs font-bold text-brand-800; }
+
+/* white bordered card */
+@utility tile { @apply rounded-3xl border border-brand-100 bg-white; }
+
+/* green gradient panel with white text */
+@utility panel-brand { @apply bg-gradient-to-br from-brand-700 to-brand-500 text-white; }
+
+/* square icon button in top bars and drawers */
+@utility icon-button { @apply rounded-xl p-2 text-brand-800 hover:bg-brand-100; }
+
+/* dimmed backdrop behind a mobile drawer */
+@utility drawer-backdrop { @apply fixed inset-0 z-40 bg-ink/30 backdrop-blur-sm md:hidden; }
+
+@utility text-link { @apply font-semibold text-brand-700 hover:underline; }
+
+/* fade-up as it scrolls into view (CSS scroll-driven animation; no-op where unsupported) */
+@keyframes reveal { from { opacity: 0; transform: translateY(32px) scale(0.98); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .animate-marquee, .animate-float { animation: none !important; }
+}

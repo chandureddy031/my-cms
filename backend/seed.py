@@ -1,8 +1,9 @@
 """Reset page content to the starting set. Donations and site settings are untouched."""
 import os
-from pathlib import Path
 
 import psycopg
+
+from server.database.pool import SCHEMA_PATH
 
 A = {  # activity slug -> (image, label). Slugs stay the same so image file names stay the same.
     "elder-care": ("/assets/elder.jpg", "Elder Care"),
@@ -397,7 +398,7 @@ COLS = ["section", "slug", "title", "body", "details", "image", "meta", "parent"
 
 if __name__ == "__main__":
     with psycopg.connect(os.getenv("DATABASE_URL", "dbname=foodwave")) as c:
-        c.execute(Path(__file__).with_name("schema.sql").read_text())
+        c.execute(SCHEMA_PATH.read_text())
         c.execute("TRUNCATE content RESTART IDENTITY")
         data = [{k: r.get(k, "" if k in ("body", "details") else None) for k in COLS} for r in rows()]
         with c.cursor() as cur:

@@ -8,17 +8,27 @@ just install      # Python venv + npm install
 just db-init      # create DB, schema, seed content
 just api          # http://localhost:8000   (dev admin key: apple-admin)
 just web          # http://localhost:3000   (CMS: /apple)
+just test                                       # backend service tests
 backend/.venv/bin/python backend/smoke_test.py   # end-to-end API check (leaves no data behind)
 ```
 
 ## Structure
-- `frontend/src/constants` — site text defaults, nav, CMS field config
-- `frontend/src/lib` — `api.ts` (all API calls), `admin.ts` (CMS session check)
-- `frontend/src/hooks` — `useDonate`, `useSidebar`
-- `frontend/src/components` — shared UI (`Shell`, `ui`, `DonateForm`, `AdminNav`…)
-- `frontend/src/app/(site)` — public pages; `frontend/src/app/apple` — CMS pages + server actions
+**Frontend** (`frontend/src`)
+- `app/` — routes only: each page fetches data and places named components
+- `components/<feature>/<piece>/` — one folder per UI piece (with its own `constants.ts` / `utils.ts`); each feature has an `index.ts`
+- `components/ui` — primitives (`Icon`, `Logo`, `Button`, `IconBadge`, `Avatar`); `components/shared` — pieces used on many pages
+- `hooks/<feature>/` — `useX` hooks with their API calls and types (`mascot`, `donations`, `health`, `layout`)
+- `lib/api` — server-side data fetching; `lib/admin` — CMS session check and server actions
+- `utils/routes.ts` — every URL as a helper (`activityHref(slug)`…); `constants/`, `types/`, `styles/`
 - `frontend/public/assets` — images and report PDFs (paths stored in the DB)
-- `backend/main.py` — API; `schema.sql` — tables; `seed.py` — starting content
+
+**Backend** (`backend`)
+- `main.py` — entry point (`uvicorn main:app`); `server/app.py` — builds the app and mounts every router
+- `server/<service>/` — `routes.py` (HTTP only), `service.py` (logic, takes a DB connection), `schemas.py`, `constants.py`
+  — services: `content`, `donations` (+ `rate_limit.py`), `site`, `health`, `admin`
+- `server/config`, `server/database` (pool + `schema.sql`), `server/errors` (error → JSON with `source`)
+- `tests/<service>/` — tests of the service logic, mirroring `server/`; `just test`
+- `seed.py` — starting content; `smoke_test.py` — end-to-end check of a running API
 - `.github/workflows` — deploy on push (per folder) and keep-awake ping
 
 ## Configuration

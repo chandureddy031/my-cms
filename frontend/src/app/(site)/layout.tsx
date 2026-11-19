@@ -1,16 +1,15 @@
-import { Shell } from "@/components/Shell";
-import { Footer } from "@/components/Footer";
-import { Logo } from "@/components/Logo";
-import { getSite } from "@/lib/api";
-import { MascotGuide } from "@/components/mascot/MascotGuide";
+import { SiteFooter, SiteShell } from "@/components/global";
+import { MascotGuide } from "@/components/mascot";
+import { Logo } from "@/components/ui";
+import { getSiteSettings } from "@/lib/api";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const site = await getSite();
+  const site = await getSiteSettings();
   return (
-    <Shell logo={<Logo name={site.name} />} mini={<Logo name={site.name.slice(0, 1)} />}>
+    <SiteShell logo={<Logo name={site.name} />} logoMini={<Logo name={site.name.slice(0, 1)} />}>
       <main>{children}</main>
-      <Footer site={site} />
+      <SiteFooter site={site} />
       <MascotGuide />
-    </Shell>
+    </SiteShell>
   );
 }

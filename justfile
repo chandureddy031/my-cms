@@ -3,7 +3,7 @@ db := env_var_or_default("DATABASE_URL", "foodwave")
 
 # install everything
 install:
-    cd backend && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+    cd backend && python3 -m venv .venv && .venv/bin/python -m pip install -r requirements-dev.txt
     cd frontend && npm install
 
 # create db, schema, seed
@@ -23,6 +23,10 @@ api:
 
 web:
     cd frontend && npm run dev
+
+# backend service tests (real Postgres, every test rolled back)
+test:
+    cd backend && .venv/bin/python -m pytest
 
 build:
     cd frontend && npm run build
