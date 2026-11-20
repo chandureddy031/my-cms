@@ -1,40 +1,23 @@
-import type { Metadata } from "next";
-import {
-  AboutSection, DonateSection, GallerySection, PeopleSection, ProgrammesSection,
-  ReportsSection, StoriesSection, WebsiteFooter, WebsiteHeader, WebsiteHero,
-} from "@/components/website";
-import { causesFromActivities, getSection, getSiteSettings } from "@/lib/api";
+import Link from "next/link";
+import { getSection } from "@/lib/api";
+import { CtaBand, HomeHero, marqueePhotos, PhotoMarquee, ProgrammeRow, Section, StatsRow, StoryCard, websiteRoutes } from "@/website";
 
 export const revalidate = 60;
-export const metadata: Metadata = { title: "APPLES NGO" };
 
-/** Everything about APPLES on one scrolling page (read-only; edited through the normal CMS). */
-export default async function WebsitePage() {
-  const [site, activities, stories, gallery, people, reports, stats] = await Promise.all([
-    getSiteSettings(),
-    getSection("activities"),
-    getSection("stories"),
-    getSection("gallery"),
-    getSection("caretakers"),
-    getSection("reports"),
-    getSection("stats"),
-  ]);
-  const heroPhotos = activities.flatMap((a) => (a.image ? [a.image] : [])).slice(0, 3);
-
+export default async function WebsiteHome() {
+  const [stats, activities, stories, gallery] = await Promise.all([getSection("stats"), getSection("activities"), getSection("stories"), getSection("gallery")]);
   return (
-    <div className="ws-page min-h-screen bg-ws-paper font-sans text-ws-ink">
-      <WebsiteHeader name={site.name} />
-      <main>
-        <WebsiteHero tagline={site.tagline} photos={heroPhotos} stats={stats.slice(0, 4)} />
-        <AboutSection site={site} />
-        <ProgrammesSection activities={activities} />
-        <StoriesSection stories={stories} />
-        <GallerySection photos={gallery.filter((photo) => photo.image)} />
-        <PeopleSection people={people} />
-        <ReportsSection reports={reports} />
-        <DonateSection causes={causesFromActivities(activities)} />
-      </main>
-      <WebsiteFooter site={site} />
-    </div>
+    <>
+      <HomeHero />
+      <div className="soil-x py-16"><StatsRow stats={stats.slice(0, 4)} /></div>
+      <PhotoMarquee photos={marqueePhotos(gallery)} />
+      <Section title="What we do" text="Six programmes, run with the community." action={<Link href={websiteRoutes.activities} className="soil-link">All activities</Link>}>
+        <div className="border-t border-soil-line">{activities.slice(0, 3).map((p) => <ProgrammeRow key={p.id} programme={p} />)}</div>
+      </Section>
+      <Section band title="Live stories from the villages" action={<Link href={websiteRoutes.stories} className="soil-link">All case studies</Link>}>
+        <div className="grid gap-7 md:grid-cols-3">{stories.slice(0, 3).map((s) => <StoryCard key={s.id} story={s} />)}</div>
+      </Section>
+      <CtaBand />
+    </>
   );
 }

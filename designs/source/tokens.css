@@ -1,0 +1,7 @@
+/* Design tokens: one block per direction. Everything else in site.css reads these. */
+body.a{--paper:#fff;--band:#fbf2f1;--ink:#2a1215;--body:#5c4a4c;--brand:#8e1f2c;--brand-ink:#fff;--line:#efdcdc;--soft:#f6e1e1;
+  --f-head:"Literata",Georgia,serif;--f-body:"Public Sans",system-ui,sans-serif;--h-w:600;--r-lg:20px;--r-sm:10px;--r-btn:10px}
+body.b{--paper:#fff;--band:#f2f2f1;--ink:#1f1f1f;--body:#55565a;--brand:#262626;--brand-ink:#fff;--line:#e2e2e0;--soft:#e7e7e5;
+  --f-head:"Bricolage Grotesque",system-ui,sans-serif;--f-body:"Atkinson Hyperlegible",system-ui,sans-serif;--h-w:700;--r-lg:28px;--r-sm:14px;--r-btn:999px}
+body.c{--paper:#fff;--band:#f8eee8;--ink:#2b1a12;--body:#5e4a40;--brand:#9a3f1e;--brand-ink:#fff;--line:#eddcd1;--soft:#f2ddd0;
+  --f-head:"Newsreader",Georgia,serif;--f-body:"Instrument Sans",system-ui,sans-serif;--h-w:500;--r-lg:6px;--r-sm:4px;--r-btn:4px}
