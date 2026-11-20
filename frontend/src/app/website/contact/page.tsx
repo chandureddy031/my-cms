@@ -10,7 +10,7 @@ export default async function ContactPage() {
   const site = await getSiteSettings();
   return (
     <>
-      <PageIntro title="Visit, call or write to us">
+      <PageIntro title="Contact Us">
         <a href={mailHref(site.email)} className="soil-btn mt-8">Write to us</a>
       </PageIntro>
       <Section><div className="max-w-3xl"><ContactDetails site={site} /></div></Section>

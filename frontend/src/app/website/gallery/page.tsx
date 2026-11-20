@@ -10,7 +10,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Prom
   const photos = gallery.filter((photo) => photo.image && (!group || photo.parent === group));
   return (
     <>
-      <PageIntro title="Photos from the field" />
+      <PageIntro title="Gallery" text="Photos from our programmes in the field." />
       <Section>
         <GalleryFilter programmes={activities} active={group} />
         <PhotoGrid photos={photos} />

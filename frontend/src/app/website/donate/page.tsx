@@ -10,7 +10,7 @@ export default async function DonatePage({ searchParams }: { searchParams: Promi
   const [{ cause }, activities, site] = await Promise.all([searchParams, getSection("activities"), getSiteSettings()]);
   return (
     <>
-      <PageIntro title="Your gift reaches a real person" text="Choose a programme and an amount. Our team calls you to complete the gift." />
+      <PageIntro title="Donate" text="Choose a programme and an amount. Our team calls you to complete the gift." />
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
           <div>

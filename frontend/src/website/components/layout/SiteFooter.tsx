@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { SiteSettings } from "@/types/site";
 import { mailHref, telHref } from "@/utils/format";
 import { WEBSITE_NAV } from "../../constants/navigation";
-import { websiteRoutes } from "../../routes";
 
 export function SiteFooter({ site }: { site: SiteSettings }) {
   return (
@@ -19,7 +18,6 @@ export function SiteFooter({ site }: { site: SiteSettings }) {
         <div className="grid content-start gap-2">
           <a href={telHref(site.phone)} className="hover:text-white">{site.phone}</a>
           <a href={mailHref(site.email)} className="hover:text-white">{site.email}</a>
-          <Link href={websiteRoutes.donate} className="soil-btn mt-4 justify-self-start py-2">Donate</Link>
         </div>
       </div>
       <div className="soil-x mt-12 flex flex-wrap justify-between gap-2 border-t border-white/15 pt-6 text-sm">

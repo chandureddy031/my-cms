@@ -12,8 +12,8 @@ export function HomeHero() {
           <h1 className="soil-h1">{HERO.title}</h1>
           <p className="soil-lead mt-6">{HERO.text}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={websiteRoutes.donate} className="soil-btn">Donate now</Link>
-            <Link href={websiteRoutes.activities} className="soil-btn-line">See our work</Link>
+            <Link href={websiteRoutes.activities} className="soil-btn">See our work</Link>
+            <Link href={websiteRoutes.contact} className="soil-btn-line">Contact us</Link>
           </div>
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-md">

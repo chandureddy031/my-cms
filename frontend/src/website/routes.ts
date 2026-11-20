@@ -13,7 +13,6 @@ export const websiteRoutes = {
 } as const;
 
 export const galleryHref = (group?: string) => (group ? `${websiteRoutes.gallery}?group=${encodeURIComponent(group)}` : websiteRoutes.gallery);
-export const donateHref = (cause?: string) => (cause ? `${websiteRoutes.donate}?cause=${encodeURIComponent(cause)}` : websiteRoutes.donate);
 
 /** Home matches only itself; other links also match their sub-paths. */
 export const isActive = (pathname: string, href: string) => (href === BASE ? pathname === BASE : pathname.startsWith(href));

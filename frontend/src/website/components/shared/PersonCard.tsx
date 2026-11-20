@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ContentItem } from "@/types/content";
-import { initialsOf, mailHref } from "@/utils/format";
+import { initialsOf } from "@/utils/format";
 
 /** Photo or initials, name, role and a short note. */
 export function PersonCard({ person }: { person: ContentItem }) {
@@ -16,7 +16,6 @@ export function PersonCard({ person }: { person: ContentItem }) {
       <h3 className="mt-4 font-semibold text-soil-ink">{person.title}</h3>
       {person.meta && <p className="text-sm text-soil-body">{person.meta}</p>}
       {person.body && <p className="mt-3 text-sm leading-relaxed text-soil-body">{person.body}</p>}
-      {person.email && <a href={mailHref(person.email)} className="soil-link mt-3 inline-block text-sm">Email</a>}
     </article>
   );
 }

@@ -1,6 +1,5 @@
 export { SiteFooter } from "./components/layout/SiteFooter";
 export { SiteHeader } from "./components/layout/SiteHeader";
-export { CtaBand } from "./components/shared/CtaBand";
 export { PageIntro } from "./components/shared/PageIntro";
 export { PersonCard } from "./components/shared/PersonCard";
 export { PhotoMarquee } from "./components/shared/PhotoMarquee";
@@ -18,3 +17,4 @@ export { ContactDetails } from "./components/contact/ContactDetails";
 export { DONATE_PROMISES } from "./constants/content";
 export { websiteRoutes } from "./routes";
 export { marqueePhotos, splitPeople } from "./utils";
+export { WEBSITE_REPORTS } from "./constants/reports";
