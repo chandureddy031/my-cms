@@ -6,7 +6,7 @@ import { getSiteSettings } from "@/lib/api";
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const site = await getSiteSettings();
   return (
-    <SiteShell logo={<Logo name={site.name} />} logoMini={<Logo name={site.name.slice(0, 1)} />}>
+    <SiteShell logo={<Logo name={site.name} />} logoMini={<Logo name={site.name} emblemOnly />}>
       <main>{children}</main>
       <SiteFooter site={site} />
       <MascotGuide />

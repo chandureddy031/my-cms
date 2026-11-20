@@ -24,7 +24,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-soil-line bg-soil-paper/95 backdrop-blur">
       <div className="soil-x flex h-20 items-center justify-between gap-6">
         <Link href={websiteRoutes.home} className="flex items-center gap-3">
-          <Image src="/logo.jpeg" alt="APPLES logo" width={56} height={48} className="h-12 w-14 object-contain" priority />
+          <Image src="/logo.jpeg" alt="APPLES logo" width={1366} height={1152} className="h-16 w-auto" priority />
           <span>
             <span className="block font-soil-head text-2xl leading-none text-soil-ink">APPLES</span>
             <span className="whitespace-nowrap text-sm text-soil-body">Anantapuramu, since 1995</span>

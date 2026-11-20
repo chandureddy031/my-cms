@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getSection, getSiteSettings } from "@/lib/api";
-import { CtaBand, ObjectivesInterventions, PageIntro, PersonCard, Section, splitPeople, VisionMission } from "@/website";
+import { CtaBand, PageIntro, PersonCard, Section, splitPeople, VisionMission } from "@/website";
 
 export const revalidate = 60;
 export const metadata: Metadata = { title: "About Us" };
@@ -12,7 +12,6 @@ export default async function AboutPage() {
     <>
       <PageIntro title="A community-centred society, registered in 1995" />
       <Section><VisionMission site={site} /></Section>
-      <Section band><ObjectivesInterventions /></Section>
       <Section title="The people behind APPLES">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">{team.map((p) => <PersonCard key={p.id} person={p} />)}</div>
         {caretakers.length > 0 && (

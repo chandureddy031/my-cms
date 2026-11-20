@@ -10,7 +10,6 @@ export { Section } from "./components/shared/Section";
 export { StatsRow } from "./components/shared/StatsRow";
 export { StoryCard } from "./components/shared/StoryCard";
 export { HomeHero } from "./components/home/HomeHero";
-export { ObjectivesInterventions } from "./components/about/ObjectivesInterventions";
 export { VisionMission } from "./components/about/VisionMission";
 export { GalleryFilter } from "./components/gallery/GalleryFilter";
 export { PhotoGrid } from "./components/gallery/PhotoGrid";
