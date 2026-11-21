@@ -1,12 +1,13 @@
 "use server";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { checkPassword, COOKIE, isAdmin, sessionToken } from "./auth";
+import { checkKey, COOKIE, isAdmin } from "./auth";
 import { getContent, saveContent, type Content } from "./content";
 
 export async function login(_: string | null, form: FormData): Promise<string | null> {
-  if (!checkPassword(String(form.get("password") ?? ""))) return "Wrong password";
-  (await cookies()).set(COOKIE, sessionToken(), { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 60 * 60 * 8 });
+  const key = String(form.get("password") ?? "");
+  if (!(await checkKey(key))) return "Wrong key, or the server is waking up — try again in a minute";
+  (await cookies()).set(COOKIE, key, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 60 * 60 * 8 });
   revalidatePath("/admin", "layout");
   return null;
 }

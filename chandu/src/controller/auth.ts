@@ -1,20 +1,17 @@
-import { createHmac, timingSafeEqual } from "node:crypto";
+import { cache } from "react";
 import { cookies } from "next/headers";
 
 export const COOKIE = "apples_admin";
 
-/** Session token derived from the password: changing ADMIN_PASSWORD logs everyone out. */
-export function sessionToken() {
-  const password = process.env.ADMIN_PASSWORD;
-  if (!password) throw new Error("ADMIN_PASSWORD is not set in .env.local");
-  return createHmac("sha256", password).update("apples-admin-session").digest("hex");
+// Same admin key as the my-cms CMS (/apple): the backend API checks it, so there is no separate password here.
+const API_URL = process.env.API_URL ?? (process.env.NODE_ENV === "production" ? "https://apples-api-1txi.onrender.com" : "http://localhost:8000");
+
+/** True when the my-cms API accepts this key; false if wrong or the API can't be reached. */
+export async function checkKey(key: string) {
+  if (!key) return false;
+  const res = await fetch(`${API_URL}/api/admin/check`, { headers: { "X-Admin-Key": key }, cache: "no-store" }).catch(() => null);
+  return res?.ok ?? false;
 }
 
-const same = (a: string, b: string) => a.length === b.length && timingSafeEqual(Buffer.from(a), Buffer.from(b));
-
-export const checkPassword = (input: string) => same(input, process.env.ADMIN_PASSWORD ?? "");
-
-export async function isAdmin() {
-  const value = (await cookies()).get(COOKIE)?.value;
-  return !!value && same(value, sessionToken());
-}
+/** The key in the login cookie is still valid (checked once per request). */
+export const isAdmin = cache(async () => checkKey((await cookies()).get(COOKIE)?.value ?? ""));

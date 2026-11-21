@@ -18,8 +18,8 @@ The main site forwards `/chandu/*` to it (`CHANDU_URL`, default `http://localhos
 ```
 just chandu       # http://localhost:3001/chandu  — or http://localhost:3000/chandu through `just web`
 ```
-- All text lives in `chandu/src/controller/content.json`; the CMS edits it. Password: `ADMIN_PASSWORD` in `chandu/.env.local` (not committed).
-- Render: its own web service, root dir `chandu`, build `npm ci && npm run build`, start `npm start`, env `ADMIN_PASSWORD`.
+- All text lives in `chandu/src/controller/content.json`; the CMS edits it. Login uses the same admin key as `/apple` (checked by the API, `API_URL` defaults to the live API in production, localhost:8000 in dev).
+- Render: its own web service, root dir `chandu`, build `npm ci && npm run build`, start `npm start`, no env vars needed.
   Deploys on push via `RENDER_CHANDU_HOOK`. Edits saved in the CMS live on the server's disk, so a redeploy/restart resets them to what is committed.
 
 ## Structure

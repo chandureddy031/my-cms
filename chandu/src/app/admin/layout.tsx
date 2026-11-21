@@ -19,7 +19,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <LogoBackground />
         <div className="glass w-full max-w-sm rounded-2xl p-8 text-center shadow-lg">
           <h1 className="text-2xl font-bold text-stone-900">APPLES CMS</h1>
-          <p className="mt-1 mb-6 text-stone-600">Enter the admin password.</p>
+          <p className="mt-1 mb-6 text-stone-600">Enter the same admin key as the main CMS (/apple).</p>
           <LoginForm />
         </div>
       </main>
