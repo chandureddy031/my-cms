@@ -8,10 +8,24 @@ const security = [
   { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
 ];
 
+// The APPLES site in /chandu is its own Next.js app; this site forwards /chandu/* to it.
+const CHANDU_URL = process.env.CHANDU_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:3001" : "");
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Photos are pre-compressed in public/assets; resizing on the free server's small CPU was the slow part.
   images: { unoptimized: true },
+  async rewrites() {
+    if (!CHANDU_URL) return [];
+    return {
+      beforeFiles: [
+        { source: "/chandu", destination: `${CHANDU_URL}/chandu` },
+        { source: "/chandu/:path+", destination: `${CHANDU_URL}/chandu/:path+` },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async headers() {
     return [
       { source: "/(.*)", headers: security },

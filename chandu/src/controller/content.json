@@ -1,0 +1,209 @@
+{
+  "site": {
+    "name": "APPLES NGO",
+    "fullName": "Agriculture People Poverty Line Coaching Education Society",
+    "tagline": "Founded by Mr. S. Thirupal · Est. 1995 · Reg. No. 154 · Anantapuramu, Andhra Pradesh",
+    "headOffice": "Edulamustur Village & Post, Bathalapalli Mandal, Anantapuramu District, Andhra Pradesh 515661",
+    "fieldOffice": "D.No. 13-3-274, RF Road, Anantapuramu 515001",
+    "chiefFunctionary": "S. Thirupal, Secretary",
+    "phone": "+91 94901 94281",
+    "email": "applesngo4u@gmail.com",
+    "footerNote": "Reg. No. 154 of 1995 · Non-profit, non-political, secular"
+  },
+  "home": {
+    "whoWeAre": "Agriculture People Poverty Line Coaching Education Society (APPLES) is a non-profit, non-political, secular and charitable organisation based on love and concern for the poor, vulnerable and marginalised. Registered in 1995 (Reg. No. 154) under the Societies Registration Act XXI of 1860, we work in rural villages and urban slums of Anantapuramu district.",
+    "stats": [
+      {
+        "value": "31",
+        "label": "Years of service"
+      },
+      {
+        "value": "640",
+        "label": "Farmers practising natural farming"
+      },
+      {
+        "value": "48",
+        "label": "Elders reunited with families"
+      },
+      {
+        "value": "92",
+        "label": "Women running own livelihoods"
+      }
+    ],
+    "workIntro": "Six programmes, run with the community.",
+    "donateTitle": "Stand with us",
+    "donateText": "Every gift goes to the programme you choose. Accounts are audited and reported every year."
+  },
+  "programmes": [
+    {
+      "slug": "elder-care",
+      "label": "Elder Care",
+      "folder": "hotos for Senior sitizens & Orphans",
+      "title": "Care & Support for Elderly and Orphans",
+      "text": "Restoring dignity, rebuilding families, reconnecting lives. A community-based care, protection and family reintegration initiative for vulnerable elderly people in Anantapur district."
+    },
+    {
+      "slug": "education",
+      "label": "Education",
+      "folder": "Photoe for Education",
+      "title": "Education & Child Rights",
+      "text": "Protecting childhood, enabling inclusion, building brighter futures. An integrated child rights, inclusive education and family-based development initiative."
+    },
+    {
+      "slug": "mental-health",
+      "label": "Mental Health",
+      "folder": "Community Mental health and wellbeing",
+      "title": "Community Mental Health & Wellbeing",
+      "text": "Community awareness, inclusion and access to mental health services for persons with disabilities, persons with mental health conditions and their caregivers."
+    },
+    {
+      "slug": "women-child",
+      "label": "Women & Child",
+      "folder": "Woman & Child development",
+      "title": "Women & Child Empowerment",
+      "text": "Promoting health, family wellbeing and economic independence for women and adolescent girls, with SERP-supported women's self-help groups."
+    },
+    {
+      "slug": "livelihoods",
+      "label": "Livelihoods",
+      "folder": "Lively Hoods",
+      "title": "Sustainable Livelihood Development",
+      "text": "Empowering the rural poor through economic independence and dignified living."
+    },
+    {
+      "slug": "natural-farming",
+      "label": "Natural Farming",
+      "folder": "Agriculture",
+      "title": "Zero Budget Natural Farming (ZBNF)",
+      "text": "Promoting sustainable agriculture, farmer empowerment and ecological wellbeing with Rythu Sadhikara Samstha (RySS)."
+    }
+  ],
+  "activities": {
+    "intro": "Health, education, elderly care, women and children, livelihoods and natural farming."
+  },
+  "about": {
+    "intro": "A community-centred society serving Anantapuramu district since 1995.",
+    "overview": "APPLES is a non-profit, non-political, secular and charitable organisation based on love and concern for the poor, vulnerable and marginalised. It was registered on 31 January 1995 under the Societies Registration Act XXI of 1860 (Reg. No. 154). Our activities run in rural villages and urban slums of Anantapuramu district, funded by government grants and schemes and by contributions from individuals, companies, trusts and the general public.",
+    "inspiration": "Mr. S. Thirupal founded APPLES in 1995 with a motto of social justice and community development, inspired by Sri S.R. Sankaran IAS, who dedicated his whole life to the welfare of poor, deprived and marginalised communities. As Principal Secretary for Social Welfare in Andhra Pradesh he set up the schools and hostels for Dalit children that grew into the AP Social Welfare Residential Schools.",
+    "vision": "Economic, social and environmentally sustainable development among deprived and marginalised people, so they lead a life of dignity and quality by accessing the resources and services available to them.",
+    "mission": "Improve the lives of women, children, youth and the farming community through education, health, economic empowerment and social amenities.",
+    "aims": [
+      "Stimulate people's involvement and organise community action for social, economic and cultural development.",
+      "Improve the quality of life of the farming community by promoting sustainable agriculture.",
+      "Seek collaboration with other voluntary organisations and government agencies.",
+      "Educate women and youth on their rights for equal status in health, social, political and economic development.",
+      "Network with NGOs and government organisations working in the same field."
+    ],
+    "team": [
+      {
+        "name": "S. Thirupal",
+        "role": "Founder & Secretary",
+        "photo": "/thirupal.jpeg"
+      },
+      {
+        "name": "Madanmohan Reddy",
+        "role": "Chairman",
+        "photo": "/madan.jpeg"
+      },
+      {
+        "name": "Chandrakanth Reddy",
+        "role": "Director of Programmes",
+        "photo": ""
+      },
+      {
+        "name": "Lakshmidevi",
+        "role": "Head of Women & Child Welfare",
+        "photo": ""
+      },
+      {
+        "name": "Ramesh Naidu",
+        "role": "Community Health Coordinator",
+        "photo": ""
+      }
+    ]
+  },
+  "stories": {
+    "intro": "Real outcomes from our programmes in Anantapuramu district.",
+    "items": [
+      {
+        "programme": "elder-care",
+        "title": "48 elders back with their families",
+        "text": "Through outreach, counselling and family tracing, nearly 48 abandoned elderly people have returned to family life."
+      },
+      {
+        "programme": "education",
+        "title": "89 children receive special learning kits",
+        "text": "A screening camp with NIPED Hyderabad assessed 124 children; 89 received educational kits for children with special needs."
+      },
+      {
+        "programme": "mental-health",
+        "title": "92 people reach mental health care",
+        "text": "Awareness and referral work connected 92 people with mental health conditions and other health problems to government hospitals."
+      },
+      {
+        "programme": "women-child",
+        "title": "92 women start their own livelihoods",
+        "text": "With SERP-supported self-help groups and bank linkages, 92 women now run their own income-generating activities."
+      },
+      {
+        "programme": "livelihoods",
+        "title": "54 members earning on their own",
+        "text": "The Sustainable Livelihood Development Programme helped 54 members set up and manage their own livelihoods."
+      },
+      {
+        "programme": "natural-farming",
+        "title": "640 farmers practise natural farming",
+        "text": "In the Venkatapuram Cluster, 640 farmers are using Zero Budget Natural Farming methods with APPLES and RySS."
+      }
+    ]
+  },
+  "gallery": {
+    "intro": "Photos from our programmes in the field."
+  },
+  "reports": {
+    "intro": "Annual reports, audited statements, tax returns and programme reports.",
+    "items": [
+      {
+        "year": "2025–26",
+        "title": "Annual Report 2025–26",
+        "summary": "Programmes, outreach and results across all six programmes.",
+        "file": ""
+      },
+      {
+        "year": "2024–25",
+        "title": "Annual Report 2024–25",
+        "summary": "Programmes, outreach and results across all six programmes.",
+        "file": ""
+      },
+      {
+        "year": "2024–25",
+        "title": "Audited Financial Statements 2024–25",
+        "summary": "Balance sheet, income and expenditure, and the auditor's report.",
+        "file": ""
+      },
+      {
+        "year": "2024–25",
+        "title": "Income Tax Return 2024–25",
+        "summary": "Filed return and acknowledgement for the financial year.",
+        "file": ""
+      },
+      {
+        "year": "2024–25",
+        "title": "Programme Report: Elder Care",
+        "summary": "Family reintegration, day care and home visits for elders.",
+        "file": ""
+      }
+    ]
+  },
+  "contact": {
+    "intro": "Call, write or visit us in Anantapuramu."
+  },
+  "donate": {
+    "intro": "Choose a programme, then call or email us and our team will help you complete the gift.",
+    "promises": [
+      "Every rupee goes to the programme you choose",
+      "Accounts are audited and reported every year",
+      "Our team calls you to complete the gift"
+    ]
+  }
+}

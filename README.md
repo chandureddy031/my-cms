@@ -12,6 +12,16 @@ just test                                       # backend service tests
 backend/.venv/bin/python backend/smoke_test.py   # end-to-end API check (leaves no data behind)
 ```
 
+## APPLES site — `chandu/` (separate app)
+Its own Next.js 16 app with a built-in CMS, served under `/chandu` (admin: `/chandu/admin`).
+The main site forwards `/chandu/*` to it (`CHANDU_URL`, default `http://localhost:3001` in dev).
+```
+just chandu       # http://localhost:3001/chandu  — or http://localhost:3000/chandu through `just web`
+```
+- All text lives in `chandu/src/controller/content.json`; the CMS edits it. Password: `ADMIN_PASSWORD` in `chandu/.env.local` (not committed).
+- Render: its own web service, root dir `chandu`, build `npm ci && npm run build`, start `npm start`, env `ADMIN_PASSWORD`.
+  Deploys on push via `RENDER_CHANDU_HOOK`. Edits saved in the CMS live on the server's disk, so a redeploy/restart resets them to what is committed.
+
 ## Structure
 **Frontend** (`frontend/src`)
 - `app/` — routes only: each page fetches data and places named components

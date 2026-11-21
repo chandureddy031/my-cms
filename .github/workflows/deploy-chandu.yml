@@ -1,0 +1,19 @@
+name: Deploy APPLES (chandu)
+
+# Redeploys the Render service for the chandu/ app when its folder changes on main (or on demand from the Actions tab).
+on:
+  push:
+    branches: [main]
+    paths: ["chandu/**"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy hook
+        env:
+          HOOK: ${{ secrets.RENDER_CHANDU_HOOK }}
+        run: |
+          test -n "$HOOK" || { echo "::error::Secret RENDER_CHANDU_HOOK is not set"; exit 1; }
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Render deploy started"
